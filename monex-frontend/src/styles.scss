@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: black;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+// colors: #FFDF00, rgb(209, 209, 209) #1d1a1a black
+
+body {
+    overflow: hidden;
+}
+
+app-root {
+    width: 100%;
+    height: 100%;
+}
