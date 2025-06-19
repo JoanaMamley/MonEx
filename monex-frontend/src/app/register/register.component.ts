@@ -45,9 +45,12 @@ export class RegisterComponent implements OnInit, OnDestroy{
     };
   }
 
-  // async onSubmit() {
-    
-  // }
+  async onSubmit() {
+    this.signUpForm?.markAllAsTouched();
+    if (this.signUpForm?.valid) {
+      this.router.navigateByUrl('/login')
+    }
+  }
 
   get username(): AbstractControl<any, any> | null | undefined {
     return this.signUpForm?.get('username');
