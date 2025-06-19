@@ -116,6 +116,36 @@ input:active, input:focus {
     display: none;
 }
 
+
+input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+    border-bottom: 1px solid #FF6F5B !important;
+    background: #1d1a1a;
+}
+
+.error-message {
+    color: #FF6F5B;
+}
+
+
+.error-icon {
+    font-size: 0.7rem;
+    background: #1d1a1a;
+    border: 1px solid #FF6F5B;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2rem;
+    color: #FF6F5B;
+    // display: inline;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #1d1a1a inset !important;
+    -webkit-text-fill-color: white !important; /* To control text color as well */
+    transition: background-color 5000s ease-in-out 0s; /* A long transition to hide the default color change */
+}
+
 @media screen and (max-width: 950px) {
     .contents {
         width: 60%;
