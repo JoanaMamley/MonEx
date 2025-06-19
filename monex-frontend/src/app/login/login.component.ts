@@ -29,6 +29,13 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
+  onSubmit() {
+    this.loginForm?.markAllAsTouched();
+    if (this.loginForm?.valid) {
+      this.router.navigateByUrl('/dashboard');
+    }
+  }
+
   get email(): AbstractControl<any, any> | null | undefined {
     return this.loginForm?.get('email');
   }
