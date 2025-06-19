@@ -6,35 +6,40 @@
                 <h3 class="link text-logo small-logo"><span class="pi pi-chart-line"></span> MonEx</h3>
                 <h2>Register</h2>
                 <p>Already have an account? <a class="link" routerLink="/login">login</a></p>
-                <form action="" class="mt-3" class="auth-form">
+                <form action="" class="mt-3" class="auth-form" [formGroup]="signUpForm!">
                     <div class="form-group">
-                        <input type="text" placeholder="Username">
-                        <!-- <div *ngIf="hasRequiredError(name)" class="error-message">
+                        <input type="text" placeholder="Username" formControlName="username">
+                        <div *ngIf="username?.invalid && (username?.touched || username?.dirty)" class="error-message">
                             <button class="error-icon"><i class="fa fa-solid fa-exclamation"></i></button>
-                            <span class="input-group-append ms-1">Can't be empty</span>
-                        </div> -->
+                            <span class="input-group-append ms-1" *ngIf="username?.hasError('required')">Can't be empty</span>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Email Address">
-                        <!-- <div *ngIf="hasRequiredError(name)" class="error-message">
+                        <input type="email" placeholder="Email Address" formControlName="email">
+                        <div *ngIf="email?.invalid && (email?.touched || email?.dirty)" class="error-message">
                             <button class="error-icon"><i class="fa fa-solid fa-exclamation"></i></button>
-                            <span class="input-group-append ms-1">Can't be empty</span>
-                        </div> -->
+                            <span class="input-group-append ms-1" *ngIf="email?.hasError('required')">Can't be empty</span>
+                            <span class="input-group-append ms-1" *ngIf="email?.hasError('email')">Not a valid email</span>
+                        </div>
                     </div>
                     <div class="form-group mt-3">
-                        <input type="password" placeholder="Password">
-                        <!-- <div *ngIf="hasRequiredError(name)" class="error-message">
+                        <input type="password" placeholder="Password" formControlName="password" [ngClass]="{'password-mismatch': hasPasswordMismatchError}">
+                        <div *ngIf="password?.invalid && (password?.touched || password?.dirty)" class="error-message">
                             <button class="error-icon"><i class="fa fa-solid fa-exclamation"></i></button>
-                            <span class="input-group-append ms-1">Can't be empty</span>
-                        </div> -->
+                            <span class="input-group-append ms-1" *ngIf="password?.hasError('required')">Can't be empty</span>
+                            <span class="input-group-append ms-1" *ngIf="password?.hasError('minlength')">Must have at least 8 characters</span>
+                        </div>
                     </div>
                     <div class="form-group mt-3">
-                        <input type="password" placeholder="Confirm Password">
-                        <!-- <div *ngIf="hasRequiredError(name)" class="error-message">
+                        <input type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+                        <div *ngIf="confirmPassword?.invalid && (confirmPassword?.touched || confirmPassword?.dirty)" class="error-message">
                             <button class="error-icon"><i class="fa fa-solid fa-exclamation"></i></button>
-                            <span class="input-group-append ms-1">Can't be empty</span>
-                        </div> -->
+                            <span class="input-group-append ms-1" *ngIf="confirmPassword?.hasError('required')">Can't be empty</span>
+                            <span class="input-group-append ms-1" *ngIf="confirmPassword?.hasError('minlength')">Must have at least 8 characters</span>
+                            <span class="input-group-append ms-1" *ngIf="hasPasswordMismatchError">Passwords don't match</span>
+                        </div>
                     </div>
+                    <span class="mb-3 error-message fs-6" *ngIf="registrationError">{{ registrationError }}</span>
                     <button class="submit-btn mt-5" type="submit">Register</button>
                 </form>
             </div>
