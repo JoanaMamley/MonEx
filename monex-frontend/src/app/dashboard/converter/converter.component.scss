@@ -1,0 +1,47 @@
+.converter {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    // border: 2px solid white;
+}
+
+.amount {
+    border: 1px solid rgb(209, 209, 209);
+    align-self: center;
+    border-radius: 0.3rem;
+}
+
+.source-target {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.source, .target {
+    width: 45%;
+    border: 1px solid rgb(209, 209, 209);
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+}
+
+:host ::ng-deep .p-select-option{
+    background: rgb(230, 209, 182);
+    color: black;
+}
+
+:host ::ng-deep .p-select-list-container {
+    background: black;
+    // height: 20%;
+}
+
+.result {
+    border: 1px solid rgb(209, 209, 209);
+    padding: 1rem;
+    border-radius: 0.7rem 4rem 4rem 0.7rem;
+}
+
+.result-value {
+    text-align: center;
+    color: #FFDF00;
+}
