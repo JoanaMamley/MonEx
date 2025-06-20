@@ -1,0 +1,45 @@
+.datatable-contents {
+    padding: 1rem;
+}
+
+h4 {
+    color: white;
+    border-bottom: 1px solid #FFDF00;
+}
+
+.hist-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.date-picker-container, .source-container {
+    width: 40%;
+}
+
+.date-picker {
+    border: 2px solid rgb(209, 209, 209);
+    border-radius: 0.3rem;
+    padding: 0.7rem;
+}
+
+.source {
+    width: 100%;
+    border: 1px solid rgb(209, 209, 209);
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+}
+
+:host ::ng-deep .p-datepicker-panel	{
+    background: rgb(230, 209, 182);
+    color: black;
+}
+
+:host ::ng-deep .p-select-option{
+    background: rgb(230, 209, 182);
+    color: black;
+}
+
+:host ::ng-deep .p-select-list-container {
+    background: black;
+}

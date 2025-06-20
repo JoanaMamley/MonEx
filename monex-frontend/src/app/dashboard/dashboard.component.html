@@ -1,9 +1,11 @@
 <div class="dashboard">
     <h1 class="link text-logo large-logo"><span class="pi pi-chart-line"></span> MonEx</h1>
     <div class="dash-container">
-        <div class="dash-item chart"></div>
+        <div class="dash-item chart">
+            <data-table [currencies]="currencies"></data-table>
+        </div>
         <div class="dash-item converter">
-            <converter></converter>
+            <converter [currencies]="currencies"></converter>
         </div>
         <div class="dash-item count">
             <h4>API  Call Count:</h4>

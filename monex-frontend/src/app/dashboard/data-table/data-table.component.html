@@ -1,0 +1,37 @@
+<div class="datatable-contents">
+    <h4 class="mb-5">Select currency and date to display historical exchange rates:</h4>
+    <div class="hist-input mb-5">
+        <div class="date-picker-container">
+            <h6>Datepicker:</h6>
+            <p-datepicker formControlName="date" class="date-picker"/>
+        </div>
+        <div class="source-container">
+            <h6>Base currency:</h6>
+            <p-select formControlName="selectedCurrency" [options]="currencies" 
+                optionLabel="name" placeholder="USD" class="source"/>
+        </div>
+    </div>
+    <p-table
+            [value]="rates"
+            [paginator]="true"
+            [rows]="10"
+            [rowsPerPageOptions]="[10, 15, 20]"
+        >
+            <ng-template #header>
+                <tr>
+                    <th pSortableColumn="name">Currency Name <p-sortIcon field="name" /></th>
+                    <th pSortableColumn="sourceCode">Source Code <p-sortIcon field="sourceCode" /></th>
+                    <th pSortableColumn="currencyCode">Currency Code <p-sortIcon field="currencyCode" /></th>
+                    <th pSortableColumn="rate">Rate <p-sortIcon field="rate" /></th>
+                </tr>
+            </ng-template>
+            <ng-template #body let-rate>
+                <tr>
+                    <td>{{ rate.name }}</td>
+                    <td>{{ rate.sourceCode }}</td>
+                    <td>{{ rate.currencyCode }}</td>
+                    <td>{{ rate.rate }}</td>
+                </tr>
+            </ng-template>
+    </p-table>
+</div>

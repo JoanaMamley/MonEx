@@ -13,3 +13,8 @@ export interface Currency {
   currencyCode: string;
   name: string;
 }
+
+export interface CurrencyWithRate extends Currency {
+  rate: number;
+  sourceCode: string;
+}
