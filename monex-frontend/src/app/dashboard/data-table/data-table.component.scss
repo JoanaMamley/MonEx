@@ -2,11 +2,6 @@
     padding: 1rem;
 }
 
-h4 {
-    color: white;
-    border-bottom: 1px solid #FFDF00;
-}
-
 .hist-input {
     display: flex;
     justify-content: space-between;
@@ -42,4 +37,18 @@ h4 {
 
 :host ::ng-deep .p-select-list-container {
     background: black;
+}
+
+@media screen and (max-width: 500px) {
+   .hist-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.date-picker-container, .source-container {
+    width: 90%;
+    margin-bottom: 1rem;
+
+}
 }

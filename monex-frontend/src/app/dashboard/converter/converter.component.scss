@@ -32,7 +32,6 @@
 
 :host ::ng-deep .p-select-list-container {
     background: black;
-    // height: 20%;
 }
 
 .result {
@@ -44,4 +43,18 @@
 .result-value {
     text-align: center;
     color: #FFDF00;
+}
+
+
+@media screen and (max-width: 500px) {
+    .source-target {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .source, .target {
+        width: 90%;
+        margin-bottom: 1rem;
+    }
 }

@@ -3,7 +3,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
+    overflow-y: auto;
+    padding-top: 2rem;
+}
+
+h1 {
+    width: 10%;
+    font-size: 28px;
 }
 
 .dash-container {
@@ -47,6 +54,26 @@
     font-size: 5rem;
     align-self: center;
     border-radius: 100%;
-    border: 2px solid #FFDF00;
-    padding: 2rem;
+}
+
+@media screen and (max-width: 800px) {
+    h1 {
+        width: 20%;
+    }
+
+    .dashboard {
+        padding-top: 45rem;
+    }
+
+    .dash-container {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .dashboard {
+        padding-top: 50rem;
+    }
 }

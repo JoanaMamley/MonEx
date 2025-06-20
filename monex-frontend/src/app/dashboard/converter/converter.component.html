@@ -1,4 +1,5 @@
 <div class="converter">
+    <h4>Convert:</h4>
     <div class="convert mt-3">
         <form [formGroup]="formGroup!" class="source-target">
             <p-select formControlName="selectedCity" [options]="currencies" 
@@ -9,7 +10,7 @@
     </div>
     <input type="number" placeholder="0.00 USD" class="amount">
     <div class="result mt-5">
-        <h4>Result:</h4>
+        <h5>Result:</h5>
         <h1 class="result-value">450 USD</h1>
     </div>
 </div>

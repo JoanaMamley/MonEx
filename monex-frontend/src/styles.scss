@@ -147,6 +147,13 @@ input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s; /* A long transition to hide the default color change */
 }
 
+// dashboard
+h4 {
+    text-decoration: underline;
+    text-decoration-color: #FFDF00;
+    text-decoration-style:double;
+}
+
 @media screen and (max-width: 950px) {
     .contents {
         width: 60%;

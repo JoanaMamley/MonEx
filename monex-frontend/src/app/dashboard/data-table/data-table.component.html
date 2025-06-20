@@ -1,8 +1,8 @@
 <div class="datatable-contents">
-    <h4 class="mb-5">Select currency and date to display historical exchange rates:</h4>
+    <h4 class="mb-5">historical exchange rates:</h4>
     <div class="hist-input mb-5">
         <div class="date-picker-container">
-            <h6>Datepicker:</h6>
+            <h6>Select Date:</h6>
             <p-datepicker formControlName="date" class="date-picker"/>
         </div>
         <div class="source-container">
@@ -15,7 +15,7 @@
             [value]="rates"
             [paginator]="true"
             [rows]="10"
-            [rowsPerPageOptions]="[10, 15, 20]"
+            [rowsPerPageOptions]="[5, 10, 15]"
         >
             <ng-template #header>
                 <tr>
