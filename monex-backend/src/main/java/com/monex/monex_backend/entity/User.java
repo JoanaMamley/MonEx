@@ -1,4 +1,4 @@
-package com.monex.monex_backend.user;
+package com.monex.monex_backend.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

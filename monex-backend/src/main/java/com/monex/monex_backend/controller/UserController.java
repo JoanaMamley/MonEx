@@ -1,5 +1,7 @@
-package com.monex.monex_backend.user;
+package com.monex.monex_backend.controller;
 
+import com.monex.monex_backend.entity.User;
+import com.monex.monex_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

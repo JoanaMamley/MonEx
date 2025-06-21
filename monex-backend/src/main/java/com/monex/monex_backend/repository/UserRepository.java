@@ -1,5 +1,6 @@
-package com.monex.monex_backend.user;
+package com.monex.monex_backend.repository;
 
+import com.monex.monex_backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
