@@ -22,10 +22,13 @@ export class DataTableComponent implements OnInit {
   selectedCurrency = new FormControl<Currency | null>(null)
   @Input({required: true}) currencies!: Currency[];
   computedRates: HistRateDataWithSource[] = [];
+  maxDate: Date | undefined;
 
   constructor(private histDataService: HistDataService, private snackBar: MatSnackBar){}
 
   async ngOnInit(): Promise<void> {
+    this.maxDate = new Date();
+
     this.selectedCurrency.setValue({
       currencyCode: "USD",
       name: "United States Dollar"
