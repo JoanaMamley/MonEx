@@ -10,7 +10,8 @@
         </div>
         <div class="dash-item count">
             <h4>API  Call Count:</h4>
-            <h1 class="count-val">12</h1>
+            <h1 class="count-val">{{ count }}</h1>
+            <button class="refresh-btn" (click)="fetchCount()">Refresh count <span class="pi pi-refresh"></span></button>
         </div>
     </div>
 </div>

@@ -28,6 +28,19 @@ h1 {
     background: #1d1a1a;
 }
 
+.refresh-btn {
+    width: 40%;
+    align-self: center;
+    background:  #1d1a1a;
+    color:  white;
+    padding: 0.5rem 1rem;
+    border: 2px solid #FFDF00;
+    font-size: 1rem;
+    border-radius: 10px;
+    font-weight: 500;
+    align-self: flex-end;
+}
+
 .chart {
     grid-column: 1 / span 3;
     grid-row: 1 / span 5;
