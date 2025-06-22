@@ -52,6 +52,10 @@
     background: black;
 }
 
+:host ::ng-deep .p-paginator-page {
+    padding: 5px;
+}
+
 @media screen and (max-width: 650px) {
    .hist-input {
         display: flex;
