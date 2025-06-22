@@ -1,16 +1,18 @@
 <div class="converter">
     <h4>Convert:</h4>
-    <div class="convert mt-3">
-        <form [formGroup]="formGroup!" class="source-target">
-            <p-select formControlName="selectedCity" [options]="currencies" 
-                optionLabel="name" placeholder="source" class="source"/>
-            <p-select formControlName="selectedCity" [options]="currencies" 
-                optionLabel="name" placeholder="target" class="target"/>
-        </form>
-    </div>
-    <input type="number" placeholder="0.00 USD" class="amount">
+    <form [formGroup]="conversionForm!">
+        <div class="convert mt-3">
+            <div class="source-target">
+                <p-select formControlName="source" [options]="currencies"
+                    optionLabel="name" placeholder="source" class="source"/>
+                <p-select formControlName="target" [options]="currencies"
+                    optionLabel="name" placeholder="target" class="target"/>
+            </div>
+        </div>
+        <input type="number" placeholder="0.00 USD" class="amount" formControlName="amount">
+    </form>
     <div class="result mt-5">
         <h5>Result:</h5>
-        <h1 class="result-value">450 USD</h1>
+        <h1 class="result-value">{{ result | number:'1.2-2' }} {{ targetCode }}</h1>
     </div>
 </div>
