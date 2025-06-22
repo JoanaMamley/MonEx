@@ -10,3 +10,15 @@ export interface HistData {
     [key: string]: number;
   }
 }
+
+export interface HistRateData {
+  id: number;
+  date: string;
+  currency: string;
+  rate: number;
+}
+
+export interface HistRateDataWithSource extends HistRateData {
+  sourceCode: string;
+  name: string;
+}

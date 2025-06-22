@@ -1,53 +1,79 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
-import { Currency, CurrencyData, CurrencyWithRate } from '../../shared/models/currency.model';
+import { Currency } from '../../shared/models/currency.model';
 import { CURRENCIES } from '../../shared/data/currencies';
-import { HistoricalDummyData } from '../../shared/data/hist-dummy';
 import { DatePicker } from 'primeng/datepicker';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
+import { HistDataService } from '../../shared/services/hist-data.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { HistRateData, HistRateDataWithSource } from '../../shared/models/hist-data.model';
 
 @Component({
   selector: 'data-table',
   standalone: true,
-  imports: [TableModule, CommonModule, DatePicker, Select, ReactiveFormsModule],
+  imports: [TableModule, CommonModule, DatePicker, Select, ReactiveFormsModule, MatSnackBarModule],
   templateUrl: './data-table.component.html',
   styleUrl: './data-table.component.scss'
 })
 export class DataTableComponent implements OnInit {
-  rates: CurrencyWithRate[] = [];
   dateControl: FormControl<Date | null> = new FormControl<Date | null>(null);
   selectedCurrency = new FormControl<Currency | null>(null)
   @Input({required: true}) currencies!: Currency[];
-  
+  computedRates: HistRateDataWithSource[] = [];
 
-    ngOnInit(): void {
-      this.extractTableData();
-      this.dateControl.valueChanges.subscribe(val => {
-        console.log(val?.toISOString().slice(0, 10));
-      })
+  constructor(private histDataService: HistDataService, private snackBar: MatSnackBar){}
+
+  async ngOnInit(): Promise<void> {
+    this.selectedCurrency.setValue({
+      currencyCode: "USD",
+      name: "United States Dollar"
+    })
+    this.dateControl.setValue(new Date(2025, 5, 6));
+    await this.fetchHistoricalData();
+  }
+
+  private computeTableData(data: HistRateData[]){
+    const baseRate = data.find(histItem => histItem.currency == this.selectedCurrency.value!.currencyCode);
+    if (!baseRate) {
+      this.snackBar.open('Base currency could not be found for that date', 'Close', {
+              duration: 3000,
+      });
     }
+    else {
+      this.computedRates = data.map(histItem => ({
+        ...histItem,
+        sourceCode: baseRate.currency + histItem.currency,
+        rate: histItem.rate / baseRate.rate,
+        name: CURRENCIES.currencies[histItem.currency]
+      }))
+    }
+  }
 
-    extractTableData() {
-      let currencies = CURRENCIES.currencies;
-      let histData = HistoricalDummyData.quotes;
-      let source = HistoricalDummyData.source;
+  private computeTableDataBaseUSD(data: HistRateData[]){
+    this.computedRates = data.map(histItem => ({
+        ...histItem,
+        sourceCode: "USD" + histItem.currency,
+        rate: histItem.rate,
+        name: CURRENCIES.currencies[histItem.currency]
+    }))
+  }
 
-
-      for (const sourceCode in histData) {
-        let rate = histData[sourceCode];
-        let currencyCode = sourceCode.replace(source, '');
-        let name = currencies[currencyCode];
-
-        this.rates.push({
-          sourceCode: sourceCode,
-          name: name,
-          rate: rate,
-          currencyCode: currencyCode
-        })
+  async fetchHistoricalData(){
+    if (!this.dateControl.value || !this.selectedCurrency.value){
+      this.snackBar.open('No date or base currency provided', 'Close', {
+              duration: 3000,
+      });
+    }
+    else {
+      const data = await this.histDataService.getHistRateData(this.dateControl.value.toISOString().slice(0, 10));
+      if (this.selectedCurrency.value.currencyCode === "USD") {
+        this.computeTableDataBaseUSD(data);
       }
-
-
+      else {
+        this.computeTableData(data);
+      }
     }
+  }
 }

@@ -7,13 +7,13 @@
         </div>
         <div class="source-container">
             <h6>Base currency:</h6>
-            <p-select [formControl]="selectedCurrency" [options]="currencies" 
-                optionLabel="name" placeholder="Select..." class="source"/>
+            <p-select [formControl]="selectedCurrency" [options]="currencies"
+                optionLabel="name" placeholder="United States Dollar (USD)" class="source"/>
         </div>
-        <button class="fetch-btn">Fetch <span class="pi pi-arrow-circle-down"></span></button>
+        <button class="fetch-btn" (click)="fetchHistoricalData()">Fetch <span class="pi pi-arrow-circle-down"></span></button>
     </div>
     <p-table
-            [value]="rates"
+            [value]="computedRates"
             [paginator]="true"
             [rows]="10"
             [rowsPerPageOptions]="[5, 10, 15]"
@@ -30,7 +30,7 @@
                 <tr>
                     <td>{{ rate.name }}</td>
                     <td>{{ rate.sourceCode }}</td>
-                    <td>{{ rate.currencyCode }}</td>
+                    <td>{{ rate.currency }}</td>
                     <td>{{ rate.rate }}</td>
                 </tr>
             </ng-template>
