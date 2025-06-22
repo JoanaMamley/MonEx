@@ -22,6 +22,9 @@ public class HistoricalRateService {
     private HistoricalRateRepository historicalRateRepository;
 
     @Autowired
+    private ApiCallCountService apiCallCountService;
+
+    @Autowired
     private WebClient webClient;
 
     @Value("${currencylayer.api.key}")
@@ -29,6 +32,7 @@ public class HistoricalRateService {
 
 
     private HistoricalRatesResponse fetchHistoricalRatesData(String date) {
+        apiCallCountService.incrementCurrentCount();
         return webClient.get().uri("/historical?access_key=" + apiKey + "&date=" + date)
                 .accept(MediaType.APPLICATION_JSON).retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, response -> response.bodyToMono(String.class).flatMap(body ->

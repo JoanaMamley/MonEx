@@ -17,10 +17,14 @@ public class LiveCurrencyRateService {
     @Autowired
     private WebClient webClient;
 
+    @Autowired
+    private ApiCallCountService apiCallCountService;
+
     @Value("${currencylayer.api.key}")
     private String apiKey;
 
     private LiveCurrencyRateResponse fetchLiveCurrencyData(String source, String target){
+        apiCallCountService.incrementCurrentCount();
         return webClient.get().uri("/live?access_key=" + apiKey + "&currencies=" + source + "," + target)
                 .accept(MediaType.APPLICATION_JSON).retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, response -> response.bodyToMono(String.class).flatMap(body ->
