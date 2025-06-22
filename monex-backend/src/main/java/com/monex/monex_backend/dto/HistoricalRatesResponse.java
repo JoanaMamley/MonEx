@@ -10,6 +10,7 @@ import java.util.Map;
 public class HistoricalRatesResponse {
     private boolean success;
     private String terms;
+    private String privacy;
     private boolean historical;
     private String date;
     private Long timestamp;
