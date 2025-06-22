@@ -5,26 +5,28 @@ import { Currency, CurrencyData, CurrencyWithRate } from '../../shared/models/cu
 import { CURRENCIES } from '../../shared/data/currencies';
 import { HistoricalDummyData } from '../../shared/data/hist-dummy';
 import { DatePicker } from 'primeng/datepicker';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 
 @Component({
   selector: 'data-table',
   standalone: true,
-  imports: [TableModule, CommonModule, DatePicker, Select],
+  imports: [TableModule, CommonModule, DatePicker, Select, ReactiveFormsModule],
   templateUrl: './data-table.component.html',
   styleUrl: './data-table.component.scss'
 })
 export class DataTableComponent implements OnInit {
   rates: CurrencyWithRate[] = [];
-  date: FormControl<Date | null> = new FormControl<Date | null>(null);
-  selectedCity = new FormControl<Currency | null>(null)
+  dateControl: FormControl<Date | null> = new FormControl<Date | null>(null);
+  selectedCurrency = new FormControl<Currency | null>(null)
   @Input({required: true}) currencies!: Currency[];
   
 
     ngOnInit(): void {
       this.extractTableData();
-      // console.log(this.rates)
+      this.dateControl.valueChanges.subscribe(val => {
+        console.log(val?.toISOString().slice(0, 10));
+      })
     }
 
     extractTableData() {

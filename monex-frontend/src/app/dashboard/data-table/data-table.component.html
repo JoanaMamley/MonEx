@@ -3,13 +3,14 @@
     <div class="hist-input mb-5">
         <div class="date-picker-container">
             <h6>Select Date:</h6>
-            <p-datepicker formControlName="date" class="date-picker"/>
+            <p-datepicker [formControl]="dateControl" class="date-picker"/>
         </div>
         <div class="source-container">
             <h6>Base currency:</h6>
-            <p-select formControlName="selectedCurrency" [options]="currencies" 
-                optionLabel="name" placeholder="USD" class="source"/>
+            <p-select [formControl]="selectedCurrency" [options]="currencies" 
+                optionLabel="name" placeholder="Select..." class="source"/>
         </div>
+        <button class="fetch-btn">Fetch <span class="pi pi-arrow-circle-down"></span></button>
     </div>
     <p-table
             [value]="rates"

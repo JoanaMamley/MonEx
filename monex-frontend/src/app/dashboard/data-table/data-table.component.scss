@@ -9,7 +9,20 @@
 }
 
 .date-picker-container, .source-container {
-    width: 40%;
+    width: 30%;
+}
+
+.fetch-btn {
+    width: 15%;
+    align-self: center;
+    background:  #1d1a1a;
+    color:  white;
+    padding: 0.5rem 1rem;
+    border: 2px solid #FFDF00;
+    font-size: 1rem;
+    border-radius: 10px;
+    font-weight: 500;
+    align-self: flex-end;
 }
 
 .date-picker {
@@ -39,16 +52,22 @@
     background: black;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 650px) {
    .hist-input {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-}
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
 
-.date-picker-container, .source-container {
-    width: 90%;
-    margin-bottom: 1rem;
+    .date-picker-container, .source-container {
+        width: 90%;
+        margin-bottom: 1.5rem;
+        align-self: self-start;
 
-}
+    }
+
+    .fetch-btn {
+        width: 25%;
+        align-self: self-start;
+    }
 }
