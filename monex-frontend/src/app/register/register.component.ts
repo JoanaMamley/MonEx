@@ -3,6 +3,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../shared/services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -16,11 +18,10 @@ export class RegisterComponent implements OnInit, OnDestroy{
   registrationError: string | null = null;
   subscriptions: Subscription[] = [];
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private authService: AuthService){}
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
-      'username': new FormControl<null | string>(null, [Validators.required]),
       'email': new FormControl<null | string>(null, [Validators.required, Validators.email]),
       'password': new FormControl<null | string>(null, [Validators.required, Validators.minLength(8)]),
       'confirmPassword': new FormControl<null | string>(null, [Validators.required, Validators.minLength(8)])
@@ -48,7 +49,21 @@ export class RegisterComponent implements OnInit, OnDestroy{
   async onSubmit() {
     this.signUpForm?.markAllAsTouched();
     if (this.signUpForm?.valid) {
-      this.router.navigateByUrl('/login')
+      try {
+        await this.authService.signup({
+          email: this.signUpForm?.get('email')?.value,
+          password: this.signUpForm?.get('password')?.value
+        })
+        this.router.navigate(['/login']);
+      }
+      catch(error) {
+        if (error instanceof HttpErrorResponse) {
+          this.registrationError = error.error.message;
+        }
+        else {
+          this.registrationError = 'An unexpected error occurred. Please try again later.';
+        }
+      }
     }
   }
 

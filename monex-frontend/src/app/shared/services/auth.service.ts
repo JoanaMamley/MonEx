@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from '../environment';
 import { Router } from '@angular/router';
+import { AuthRequest } from '../models/auth-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,11 +44,11 @@ export class AuthService {
     );
   }
 
-  signup(user: any): Observable<any> {
+  signup(user: AuthRequest): Observable<any> {
     return this.http.post(`${environment.apiUrl}/signup`, user, { responseType: 'text' });
   }
 
-  login(credentials: any): Observable<any> {
+  login(credentials: AuthRequest): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/login`, credentials, { withCredentials: true }).pipe(
       tap(response => {
         if (response && response.username) {
