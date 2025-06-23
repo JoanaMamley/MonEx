@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 100vh;
     overflow-y: auto;
     padding-top: 2rem;
 }
@@ -44,14 +44,12 @@ h1 {
 .chart {
     grid-column: 1 / span 3;
     grid-row: 1 / span 5;
-    // background: lightblue;
     padding: 1rem;
 }
 
 .converter {
     grid-column: 4 / span 2;
     grid-row: 1 / span 3;
-    // background: pink;
     padding: 1rem;
 }
 
@@ -74,19 +72,33 @@ h1 {
         width: 20%;
     }
 
-    .dashboard {
-        padding-top: 45rem;
-    }
-
     .dash-container {
+        width: 100%;
+        height: 100vh;
+        overflow-y: auto;
         padding: 1rem;
         display: flex;
         flex-direction: column;
     }
+
+    .large-logo {
+        display: none;
+    }
+
+    .small-logo {
+        display: block;
+        width: 28%;
+        margin-bottom: 1rem;
+        align-self: center;
+    }
 }
 
 @media screen and (max-width: 500px) {
-    .dashboard {
-        padding-top: 50rem;
+    .small-logo {
+        width: 40%;
+    }
+
+    .refresh-btn {
+        width: 15%;
     }
 }

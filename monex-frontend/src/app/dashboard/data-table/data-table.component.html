@@ -1,7 +1,7 @@
 <div class="datatable-contents">
-    <div class="mb-5 d-flex justify-content-between">
+    <div class="mb-5 table-header">
         <h4>historical exchange rates:</h4>
-        <button class="logout-btn" (click)="logout()">logout <span class="pi pi-sign-out ms-1"></span></button>
+        <button class="logout-btn" (click)="logout()"><span class="btn-name">logout</span> <span class="pi pi-sign-out ms-1"></span></button>
     </div>
     <div class="hist-input mb-5">
         <div class="date-picker-container">
@@ -13,7 +13,7 @@
             <p-select [formControl]="selectedCurrency" [options]="currencies"
                 optionLabel="name" placeholder="United States Dollar (USD)" class="source"/>
         </div>
-        <button class="fetch-btn" (click)="fetchHistoricalData()">Fetch <span class="pi pi-arrow-circle-down"></span></button>
+        <button class="fetch-btn" (click)="fetchHistoricalData()"><span class="btn-name">Fetch</span> <span class="pi pi-arrow-circle-down"></span></button>
     </div>
     <p-table
             [value]="computedRates"

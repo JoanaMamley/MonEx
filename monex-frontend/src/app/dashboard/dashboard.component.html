@@ -1,7 +1,7 @@
 <div class="dashboard">
     <h1 class="link text-logo large-logo"><span class="pi pi-chart-line"></span> MonEx</h1>
-    <h3 class="link text-logo small-logo"><span class="pi pi-chart-line"></span> MonEx</h3>
     <div class="dash-container">
+        <h3 class="link text-logo small-logo"><span class="pi pi-chart-line"></span> MonEx</h3>
         <div class="dash-item chart">
             <data-table [currencies]="currencies"></data-table>
         </div>
@@ -11,7 +11,7 @@
         <div class="dash-item count">
             <h4>API  Call Count:</h4>
             <h1 class="count-val">{{ count }}</h1>
-            <button class="refresh-btn" (click)="fetchCount()">Refresh count <span class="pi pi-refresh"></span></button>
+            <button class="refresh-btn" (click)="fetchCount()"><span class="btn-name">Refresh count</span> <span class="pi pi-refresh"></span></button>
         </div>
     </div>
 </div>
