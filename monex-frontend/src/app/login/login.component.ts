@@ -2,7 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { lastValueFrom, Subscription } from 'rxjs';
+import { AuthService } from '../shared/services/auth.service';
+import { LoginResponse } from '../shared/models/auth-response.model';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy{
   loginError: string | null = null;
   subscriptions: Subscription[] = [];
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private authService: AuthService){}
 
    ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -29,10 +31,22 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.loginForm?.markAllAsTouched();
     if (this.loginForm?.valid) {
-      this.router.navigateByUrl('/dashboard');
+      const res: void | LoginResponse = await lastValueFrom(this.authService.login({
+        email: this.loginForm?.value.email,
+        password: this.loginForm?.value.password
+      })).catch(err => {
+        this.loginError = err.error.message;
+        console.error(err);
+      })
+
+
+      if (res && res.message === 'Login successful') {
+        this.loginError = null;
+        this.router.navigateByUrl('/dashboard');
+      }
     }
   }
 

@@ -4,6 +4,7 @@ import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from '../environment';
 import { Router } from '@angular/router';
 import { AuthRequest } from '../models/auth-request.model';
+import { LoginResponse } from '../models/auth-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +26,11 @@ export class AuthService {
 
   // Check the authentication status by calling the protected /profile endpoint
   checkAuthStatus(): Observable<boolean> {
-    return this.http.get<any>(`${environment.apiUrl}/profile`, { withCredentials: true }).pipe(
+    return this.http.get<any>(`${environment.apiUrl}/auth/profile`, { withCredentials: true }).pipe(
       map(response => {
-        if (response && response.username) {
+        if (response && response.email) {
             this.loggedIn.next(true);
-            this.currentUser.next(response.username);
+            this.currentUser.next(response.email);
             return true;
         }
         this.loggedIn.next(false);
@@ -45,22 +46,22 @@ export class AuthService {
   }
 
   signup(user: AuthRequest): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/signup`, user, { responseType: 'text' });
+    return this.http.post(`${environment.apiUrl}/auth/signup`, user, { responseType: 'text' });
   }
 
-  login(credentials: AuthRequest): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/login`, credentials, { withCredentials: true }).pipe(
+  login(credentials: AuthRequest): Observable<LoginResponse> {
+    return this.http.post<any>(`${environment.apiUrl}/auth/login`, credentials, { withCredentials: true }).pipe(
       tap(response => {
-        if (response && response.username) {
+        if (response && response.email) {
             this.loggedIn.next(true);
-            this.currentUser.next(response.username);
+            this.currentUser.next(response.email);
         }
       })
     );
   }
 
   logout(): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/logout`, {}, { withCredentials: true, responseType: 'text' }).pipe(
+    return this.http.post(`${environment.apiUrl}/auth/logout`, {}, { withCredentials: true, responseType: 'text' }).pipe(
       tap(() => {
         this.loggedIn.next(false);
         this.currentUser.next(null);
