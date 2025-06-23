@@ -9,6 +9,8 @@ import { Select } from 'primeng/select';
 import { HistDataService } from '../../shared/services/hist-data.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { HistRateData, HistRateDataWithSource } from '../../shared/models/hist-data.model';
+import { AuthService } from '../../shared/services/auth.service';
+import { lastValueFrom, Subscription } from 'rxjs';
 
 @Component({
   selector: 'data-table',
@@ -24,7 +26,7 @@ export class DataTableComponent implements OnInit {
   computedRates: HistRateDataWithSource[] = [];
   maxDate: Date | undefined;
 
-  constructor(private histDataService: HistDataService, private snackBar: MatSnackBar){}
+  constructor(private histDataService: HistDataService, private snackBar: MatSnackBar, private authService: AuthService){}
 
   async ngOnInit(): Promise<void> {
     this.maxDate = new Date();
@@ -35,6 +37,16 @@ export class DataTableComponent implements OnInit {
     })
     this.dateControl.setValue(new Date(2025, 5, 6));
     await this.fetchHistoricalData();
+  }
+
+  async logout() {
+    await lastValueFrom(this.authService.logout()).catch((error) => {
+      console.error('Logout failed:', error);
+      this.snackBar.open('logout failed', 'Close', {
+              duration: 3000,
+      });
+    }
+    );
   }
 
   private computeTableData(data: HistRateData[]){

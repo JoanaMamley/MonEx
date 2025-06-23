@@ -25,6 +25,14 @@
     align-self: flex-end;
 }
 
+.logout-btn {
+    background:  #1d1a1a;
+    color:  #FFDF00;
+    padding: 0.5rem 1rem;
+    border: 2px solid rgb(209, 209, 209);
+    border-radius: 10px;
+}
+
 .date-picker {
     border: 2px solid rgb(209, 209, 209);
     border-radius: 0.3rem;
