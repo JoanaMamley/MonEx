@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { AuthService } from '../shared/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -13,10 +13,9 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
-export class RegisterComponent implements OnInit, OnDestroy{
+export class RegisterComponent implements OnInit{
   signUpForm?: FormGroup;
   registrationError: string | null = null;
-  subscriptions: Subscription[] = [];
 
   constructor(private router: Router, private authService: AuthService){}
 
@@ -26,10 +25,6 @@ export class RegisterComponent implements OnInit, OnDestroy{
       'password': new FormControl<null | string>(null, [Validators.required, Validators.minLength(8)]),
       'confirmPassword': new FormControl<null | string>(null, [Validators.required, Validators.minLength(8)])
     }, this.passwordMatchValidator())
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   passwordMatchValidator(): ValidatorFn {
@@ -50,10 +45,10 @@ export class RegisterComponent implements OnInit, OnDestroy{
     this.signUpForm?.markAllAsTouched();
     if (this.signUpForm?.valid) {
       try {
-        await this.authService.signup({
+        await lastValueFrom( this.authService.signup({
           email: this.signUpForm?.get('email')?.value,
           password: this.signUpForm?.get('password')?.value
-        })
+        }))
         this.router.navigate(['/login']);
       }
       catch(error) {
