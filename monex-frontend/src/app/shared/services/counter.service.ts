@@ -11,6 +11,6 @@ export class CounterService {
   constructor(private http: HttpClient) { }
 
   getCurrentCount(): Observable<number> {
-    return this.http.get<number>(`${environment.apiUrl}/count`);
+    return this.http.get<number>(`${environment.apiUrl}/count`, { withCredentials: true });
   }
 }

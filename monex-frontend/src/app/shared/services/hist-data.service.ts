@@ -12,6 +12,6 @@ export class HistDataService {
   constructor(private http: HttpClient) { }
 
   getHistRateData(date: string): Promise<HistRateData[]> {
-    return lastValueFrom(this.http.get<HistRateData[]>(`${environment.apiUrl}/historical?date=${date}`));
+    return lastValueFrom(this.http.get<HistRateData[]>(`${environment.apiUrl}/historical?date=${date}`, { withCredentials: true }));
   }
 }
