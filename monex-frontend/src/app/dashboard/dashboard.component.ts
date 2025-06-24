@@ -17,7 +17,6 @@ import { Subscription } from 'rxjs';
 })
 export class DashboardComponent implements OnInit, OnDestroy{
   currencies: Currency[] = [];
-  formGroup: FormGroup | undefined;
   count: number = 0;
   counterSubscription?: Subscription;
 
@@ -33,9 +32,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
   fetchCount(){
     this.currencies = this.extractCurrenciesModern();
-      this.formGroup = new FormGroup({
-          text: new FormControl<string | null>(null)
-      });
 
     this.counterSubscription = this.counterService.getCurrentCount().subscribe(count => {
       this.count = count;

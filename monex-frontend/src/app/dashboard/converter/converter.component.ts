@@ -23,7 +23,7 @@ export class ConverterComponent implements OnInit, OnDestroy{
   @Input({required: true}) currencies!: Currency[];
   result: number = 0.00
   subscriptions: Subscription[] = [];
-  private destroy$ = new Subject<void>();
+  destroy$ = new Subject<void>();
   targetCode: string = "USD";
   conversionForm?: FormGroup;
 
