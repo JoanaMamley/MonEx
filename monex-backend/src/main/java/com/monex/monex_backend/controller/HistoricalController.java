@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/historical")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://34.55.103.66:4200")
 public class HistoricalController {
     @Autowired
     private HistoricalRateService historicalRateService;

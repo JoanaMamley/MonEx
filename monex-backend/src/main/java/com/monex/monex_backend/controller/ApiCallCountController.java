@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/count")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://34.55.103.66:4200")
 public class ApiCallCountController {
 
     @Autowired
