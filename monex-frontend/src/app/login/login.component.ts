@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit, OnDestroy{
         email: this.loginForm?.value.email,
         password: this.loginForm?.value.password
       })).catch(err => {
-        this.loginError = err.error.message;
+        this.loginError = err.error;
         console.error(err);
       })
 

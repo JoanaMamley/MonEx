@@ -23,6 +23,7 @@
                             <span class="input-group-append ms-1" *ngIf="password?.hasError('minlength')">Must have at least 8 characters</span>
                         </div>
                     </div>
+                    <span class="mb-3 error-message fs-6" *ngIf="loginError">{{ loginError }}</span>
                     <button class="submit-btn mt-5">login</button>
                 </form>
             </div>
