@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { lastValueFrom, Subscription } from 'rxjs';
 import { AuthService } from '../shared/services/auth.service';
 import { LoginResponse } from '../shared/models/auth-response.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -37,9 +38,14 @@ export class LoginComponent implements OnInit, OnDestroy{
       const res: void | LoginResponse = await lastValueFrom(this.authService.login({
         email: this.loginForm?.value.email,
         password: this.loginForm?.value.password
-      })).catch(err => {
-        this.loginError = err.error;
-        console.error(err);
+      })).catch(error => {
+        if (error instanceof HttpErrorResponse) {
+          console.error(error)
+          this.loginError = error.error;
+        }
+        else {
+          this.loginError = 'An unexpected error occurred. Please try again later.';
+        }
       })
 
 

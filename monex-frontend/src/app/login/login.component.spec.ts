@@ -121,7 +121,7 @@ describe('LoginComponent', () => {
     });
 
     it('should set loginError on login failure', fakeAsync(() => {
-      const errorResponse = { error: { message: 'Invalid credentials' } };
+      const errorResponse = { error: { message: 'An unexpected error occurred. Please try again later.' } };
       authServiceSpy.login.and.returnValue(throwError(() => errorResponse));
 
       component.loginForm?.setValue({ email: 'test@example.com', password: 'wrongpassword' });
@@ -129,7 +129,7 @@ describe('LoginComponent', () => {
       component.onSubmit();
       tick();
 
-      expect(component.loginError).toBe('Invalid credentials');
+      expect(component.loginError).toBe('An unexpected error occurred. Please try again later.');
       expect(router.navigateByUrl).not.toHaveBeenCalled();
     }));
   });

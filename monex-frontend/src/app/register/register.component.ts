@@ -53,7 +53,8 @@ export class RegisterComponent implements OnInit{
       }
       catch(error) {
         if (error instanceof HttpErrorResponse) {
-          this.registrationError = error.error.message;
+          console.error(error);
+          this.registrationError = error.error;
         }
         else {
           this.registrationError = 'An unexpected error occurred. Please try again later.';
