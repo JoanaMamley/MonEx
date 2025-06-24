@@ -21,7 +21,7 @@ public class ApiCallCountService {
 
         if (optionRecord.isPresent()) {
             ApiCallCount countRecord = optionRecord.get();
-            int current = countRecord.getCount() == null ? 0 : countRecord.getCount();
+            int current = countRecord.getCount() == null ? 1 : countRecord.getCount();
             countRecord.setCount(current+1);
             apiCallCountRepository.save(countRecord);
         } else {
