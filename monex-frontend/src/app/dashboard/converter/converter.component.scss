@@ -15,7 +15,7 @@
     display: flex;
     width: 100%;
     flex-direction: row;
-    justify-content: space-between;
+    gap: 1rem;
 }
 
 .source, .target {
@@ -23,6 +23,8 @@
     border: 1px solid rgb(209, 209, 209);
     padding: 0.5rem;
     border-radius: 0.3rem;
+    flex: 1;
+    width: auto;
 }
 
 :host ::ng-deep .p-select-option{
